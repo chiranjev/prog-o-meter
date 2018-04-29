@@ -294,7 +294,7 @@ class MultipleDaysGUI(object):
             update_days_file(filename, days)
         else:
             print("Enter number between 0 and " + str(self.goal))
-
+    
 
 class StartGUI(object):
     """Class contains everything related to starting up the application as a new or returning user.
