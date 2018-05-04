@@ -15,9 +15,9 @@ __license__ = "MIT"
 
 import datetime
 try:
-    import Tkinter as Tk  # Python < 3.0
+    import Tkinter as Tk        # Python < 3.0
 except ImportError:
-    import tkinter as Tk  # Python >= 3.0
+    import tkinter as Tk        # Python >= 3.0
 
 class ProgressGUI(object):
 
@@ -73,10 +73,10 @@ class ProgressGUI(object):
         self.CANVAS_WIDTH = 1200
         self.CANVAS_HEIGHT = 600
         VERTICAL_TEXT_POSITION = 100
-        self.canvas = Tk.Canvas(self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = self.CANVAS_WIDTH, height = self.CANVAS_HEIGHT)
         self.canvas.pack()
-        self.canvas.create_text(self.CANVAS_WIDTH / 2, VERTICAL_TEXT_POSITION, text=("".join(("Hello ", self.username))))
-        self.countdown_text = self.canvas.create_text(self.CANVAS_WIDTH / 2, VERTICAL_TEXT_POSITION + 40, justify=Tk.CENTER, text="".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
+        self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION, text=("".join(("Hello ", self.username))))
+        self.countdown_text = self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION + 40, justify = Tk.CENTER, text = "".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
     def button_layout(self):
         """Display a button with the text "1 more day!" on the canvas.
 
@@ -85,32 +85,32 @@ class ProgressGUI(object):
         Attributes:
             add_day_button: A button with the text "1 more day!", which calls the function add_day
         """
-        self.add_day_button = Tk.Button(self.root, text="1 more day!", command=self.add_day)
+        self.add_day_button = Tk.Button(self.root, text = "1 more day!", command = elf.add_day)
         self.add_day_button.pack()
         if self.days >= self.GOAL:  # Disable add_day_button if goal have been reached
-            self.add_day_button.config(state="disabled")
+            self.add_day_button.config(state = "disabled")
         """Display a button with the text "Whoops!" on the canvas.
 
-            Creates and display a button with the text "Whoops!" with the function delete_day() as callback function. If number of days of progress is 0, the button is displayed, but is disabled. 
+            Creates and display a button with the text "Whoops!" with the function delete_day() as callback function. If number of days of progress is 0, the button is displayed, but is disabled.
 
             Attributes:
             whoops_button: A button with the text "Whoops!", which calls the function delete_day
                 """
-        self.whoops_button = Tk.Button(self.root, text="Whoops!", command=self.delete_day)
-        self.whoops_button.pack(pady=5)
+        self.whoops_button = Tk.Button(self.root, text = "Whoops!", command = self.delete_day)
+        self.whoops_button.pack(pady = 5)
         if self.days <= 0:  # Disable Whoops button if days of progress become <= 0
-            self.whoops_button.config(state="disabled")
+            self.whoops_button.config(state = "disabled")
         """Display a button with the text "Add Multiple Days" on the canvas.
 
-            Creates and display a button with the text "Add Multiple Days" with the function add_multidays() as callback function. If user have already reached their goal, the button is displayed, but is disabled. 
+            Creates and display a button with the text "Add Multiple Days" with the function add_multidays() as callback function. If user have already reached their goal, the button is displayed, but is disabled.
 
             Attributes:
             add_multidays_button: A button with the text "Add Multiple Days", which calls the function add_multidays
                 """
-        self.add_multidays_button = Tk.Button(self.root, text="Add Multiple Days", command=lambda: self.add_multidays(self.days, self.GOAL, self.filename, self.username))
-        self.add_multidays_button.pack(pady=5)
+        self.add_multidays_button = Tk.Button(self.root, text = "Add Multiple Days", command = lambda: self.add_multidays(self.days, self.GOAL, self.filename, self.username))
+        self.add_multidays_button.pack(pady = 5)
         if self.days >= self.GOAL:  # Disable add_multidays_button if goal have been reached
-            self.add_multidays_button.config(state="disabled")
+            self.add_multidays_button.config(state = "disabled")
     def prog_o_meter(self):
         """Display a prog-o-meter on the canvas.
 
@@ -123,7 +123,7 @@ class ProgressGUI(object):
         RECTANGLE_HEIGHT = 20
         RECTANGLE_WIDENESS = (self.CANVAS_WIDTH -(LEFT_BOUNDARY + RIGHT_BOUNDARY)) / self.GOAL
         for i in range(self.GOAL):        # Create a rectangle for each day and add it to the rectangle_list
-            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT / 2,LEFT_BOUNDARY + RECTANGLE_WIDENESS,(self.CANVAS_HEIGHT / 2) + RECTANGLE_HEIGHT, fill="white")
+            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT / 2,LEFT_BOUNDARY + RECTANGLE_WIDENESS,(self.CANVAS_HEIGHT / 2) + RECTANGLE_HEIGHT, fill = "white")
             self.rectangle_list.append(rectangle)
             LEFT_BOUNDARY += RECTANGLE_WIDENESS
     def progress(self):
@@ -134,7 +134,7 @@ class ProgressGUI(object):
         Remaining days will remain white.
         """
         for i in range(self.days):  # Color a rectangle pr. completed day blue (from left to right)
-            self.canvas.itemconfig(self.rectangle_list[i], fill="blue")
+            self.canvas.itemconfig(self.rectangle_list[i], fill = "blue")
     def get_completion_date(self, days_remaining):
         """Calculate the date at which the challenge will be over.
 
@@ -146,7 +146,7 @@ class ProgressGUI(object):
         """
 
         today = datetime.date.today()
-        completion_date = today + datetime.timedelta(days=days_remaining)
+        completion_date = today + datetime.timedelta(days = days_remaining)
 
         if 4 <= completion_date.day <= 20 or 24 <= completion_date.day <= 30:        # Set the suffix for the day to 'th' if it is between 4 and 20 or between 24 and 30
             suffix = "th"
@@ -164,12 +164,12 @@ class ProgressGUI(object):
         self.days += 1
         self.days_remaining = self.GOAL - self.days
         self.completion_date = self.get_completion_date(self.days_remaining)
-        self.canvas.itemconfig(self.rectangle_list[self.days - 1], fill="green")
+        self.canvas.itemconfig(self.rectangle_list[self.days - 1], fill = "green")
         update_days_file(self.filename, self.days)
-        self.canvas.itemconfig(self.countdown_text, text="".join(("You have ", str(self.days_remaining),  " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
+        self.canvas.itemconfig(self.countdown_text, text = "".join(("You have ", str(self.days_remaining),  " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
         if self.days >= self.GOAL:  # Disable add_day_button if goal have been reached
-            self.add_day_button.config(state="disabled")
-            self.add_multidays_button.config(state="disabled")
+            self.add_day_button.config(state = "disabled")
+            self.add_multidays_button.config(state = "disabled")
         if self.days > 0 and self.whoops_button["state"] == "disabled":  # Enable whoops_button if days of progress is > 0
             self.whoops_button["state"] = "normal"
     def delete_day(self):
@@ -179,11 +179,11 @@ class ProgressGUI(object):
         self.days -= 1
         self.days_remaining = self.GOAL - self.days
         self.completion_date = self.get_completion_date(self.days_remaining)
-        self.canvas.itemconfig(self.rectangle_list[self.days], fill="white")
+        self.canvas.itemconfig(self.rectangle_list[self.days], fill = "white")
         update_days_file(self.filename, self.days)
-        self.canvas.itemconfig(self.countdown_text, text="".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
+        self.canvas.itemconfig(self.countdown_text, text = "".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
         if self.days <= 0:  # Disable Whoops button if days become 0
-            self.whoops_button.config(state="disabled")
+            self.whoops_button.config(state = "disabled")
         # Enable add_day_button if days of progress is < goal
         if self.add_day_button["state"] == "disabled":
             self.add_day_button["state"] = "normal"
@@ -237,12 +237,12 @@ class MultipleDaysGUI(object):
         """
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
-        self.canvas = Tk.Canvas(self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
         self.canvas.pack()
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
         self.text_entry.focus_force()
-        self.canvas.create_text(self.CANVAS_WIDTH / 2, 20, text="Enter the days you want to progress")
+        self.canvas.create_text(self.CANVAS_WIDTH/2, 20, text = "Enter the days you want to progress")
 
     def submit_button(self):
         """Display the submit button on the canvas.
@@ -253,7 +253,7 @@ class MultipleDaysGUI(object):
         Attributes:
             submit_button: Button with the text "Submit", which calls the function updateDays_and_close
         """
-        self.submit_button = Tk.Button(self.root, text="Submit", command=lambda: self.updateDays_and_close(self.days, self.filename, self.username))
+        self.submit_button = Tk.Button(self.root, text = "Submit", command = lambda: self.updateDays_and_close(self.days, self.filename, self.username))
         self.submit_button.pack()
         self.root.bind('<Return>', lambda: self.updateDays_and_close(self.days, self.filename, self.username))
 
@@ -309,9 +309,9 @@ class StartGUI(object):
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
         VERTICAL_TEXT_POSITION = 20
-        self.canvas = Tk.Canvas(self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
         self.canvas.pack()
-        self.canvas.create_text(self.CANVAS_WIDTH / 2, VERTICAL_TEXT_POSITION, text="Hello, welcome to the prog-o-meter!")
+        self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION, text = "Hello, welcome to the prog-o-meter!")
 
     def input_buttons(self):
         """Display the buttons on the canvas.
@@ -323,8 +323,8 @@ class StartGUI(object):
             BTTN_WIDTH: The width of the radiobuttons is hardcoded to 18 text units.
         """
         BTTN_WIDTH = 18
-        Tk.Radiobutton(self.root, text="I already have a meter", variable=self.choice, value=1, command=self.close_window, indicatoron=0, width=BTTN_WIDTH).pack(pady=5)
-        Tk.Radiobutton(self.root, text="I don't have a meter yet", variable=self.choice, value=2, command=self.close_window, indicatoron=0, width=BTTN_WIDTH).pack(pady=5)
+        Tk.Radiobutton(self.root, text = "I already have a meter", variable = elf.choice, value = 1, command = elf.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
+        Tk.Radiobutton(self.root, text = "I don't have a meter yet", variable = elf.choice, value = 2, command = elf.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
     def close_window(self):
         """Close the Tkinter window."""
         self.root.destroy()
@@ -376,15 +376,15 @@ class UsernameGUI(object):
         """
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
-        self.canvas = Tk.Canvas(self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
         self.canvas.pack()
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
         self.text_entry.focus_force()
         if self.user_type == 1:  # Display appropriate greeting for returning users
-            self.canvas.create_text(self.CANVAS_WIDTH / 2, 20, text="Good to see you again! Please enter your name")
+            self.canvas.create_text(self.CANVAS_WIDTH/2, 20, text = "Good to see you again! Please enter your name")
         elif self.user_type == 2:  # Display appropriate greeting for new users
-            self.canvas.create_text(self.CANVAS_WIDTH / 2, 20, text="Lets get you started! Please enter your name")
+            self.canvas.create_text(self.CANVAS_WIDTH/2, 20, text = "Lets get you started! Please enter your name")
     def input_button(self):
         """Display the inout button on the canvas.
 
@@ -394,10 +394,10 @@ class UsernameGUI(object):
         Attributes:
             submit_button: Button with the text "Submit", which calls the function save_and_close
         """
-        self.submit_button = Tk.Button(self.root, text="Submit", command=self.save_and_close)
+        self.submit_button = Tk.Button(self.root, text = "Submit", command = elf.save_and_close)
         self.submit_button.pack()
         self.root.bind('<Return>', self.save_and_close)
-    def save_and_close(self, event=None):
+    def save_and_close(self, event = None):
         """Save input text as username, then close Tkinter window. """
         self.username = self.text_entry.get()
         self.root.destroy()
@@ -442,7 +442,7 @@ def main():
     name_screen = UsernameGUI(user_state)
     username = name_screen.get_name()
     filename = "".join((username.lower(), ".txt"))
-    if user_state == 2:  # Make a new file for a new user, and set their current progress to 0 days
+    if user_state == 2:        # Make a new file for a new user, and set their current progress to 0 days
         update_days_file(filename, "0")
     days = read_days_file(filename)
     days = int(days)
