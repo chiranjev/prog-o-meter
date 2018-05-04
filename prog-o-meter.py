@@ -22,7 +22,7 @@ except ImportError:
 class ProgressGUI(object):
 
     """Class contains all things related to the window displaying the prog-o-meter, including text, buttons and actions linked to buttons.
-
+    
     Attributes:
         root: a tkinter root.
         filename: the name of the .txt file storing the user's number of days.
@@ -75,8 +75,8 @@ class ProgressGUI(object):
         VERTICAL_TEXT_POSITION = 100
         self.canvas = Tk.Canvas(self.root, width = self.CANVAS_WIDTH, height = self.CANVAS_HEIGHT)
         self.canvas.pack()
-        self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION, text=("".join(("Hello ", self.username))))
-        self.countdown_text = self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION + 40, justify = Tk.CENTER, text = "".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
+        self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION, text = ("".join(("Hello ", self.username))))
+        self.countdown_text = self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION+40, justify = Tk.CENTER, text = "".join(("You have ", str(self.days_remaining), " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
     def button_layout(self):
         """Display a button with the text "1 more day!" on the canvas.
 
@@ -381,9 +381,9 @@ class UsernameGUI(object):
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
         self.text_entry.focus_force()
-        if self.user_type == 1:  # Display appropriate greeting for returning users
+        if self.user_type == 1:        # Display appropriate greeting for returning users
             self.canvas.create_text(self.CANVAS_WIDTH/2, 20, text = "Good to see you again! Please enter your name")
-        elif self.user_type == 2:  # Display appropriate greeting for new users
+        elif self.user_type == 2:        # Display appropriate greeting for new users
             self.canvas.create_text(self.CANVAS_WIDTH/2, 20, text = "Lets get you started! Please enter your name")
     def input_button(self):
         """Display the inout button on the canvas.
@@ -397,7 +397,7 @@ class UsernameGUI(object):
         self.submit_button = Tk.Button(self.root, text = "Submit", command = self.save_and_close)
         self.submit_button.pack()
         self.root.bind('<Return>', self.save_and_close)
-    def save_and_close(self, event = None):
+    def save_and_close(self, event=None):
         """Save input text as username, then close Tkinter window. """
         self.username = self.text_entry.get()
         self.root.destroy()
@@ -442,7 +442,7 @@ def main():
     name_screen = UsernameGUI(user_state)
     username = name_screen.get_name()
     filename = "".join((username.lower(), ".txt"))
-    if user_state == 2:        # Make a new file for a new user, and set their current progress to 0 days
+    if user_state == 2:        #Make a new file for a new user, and set their current progress to 0 days
         update_days_file(filename, "0")
     days = read_days_file(filename)
     days = int(days)
