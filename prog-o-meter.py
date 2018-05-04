@@ -123,7 +123,7 @@ class ProgressGUI(object):
         RECTANGLE_HEIGHT = 20
         RECTANGLE_WIDENESS = (self.CANVAS_WIDTH-(LEFT_BOUNDARY+RIGHT_BOUNDARY))/self.GOAL
         for i in range(self.GOAL):        # Create a rectangle for each day and add it to the rectangle_list
-            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT/2,LEFT_BOUNDARY+RECTANGLE_WIDENESS,(self.CANVAS_HEIGHT/2)+RECTANGLE_HEIGHT, fill = "white")
+            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT/2, LEFT_BOUNDARY+RECTANGLE_WIDENESS, (self.CANVAS_HEIGHT/2)+RECTANGLE_HEIGHT, fill = "white")
             self.rectangle_list.append(rectangle)
             LEFT_BOUNDARY += RECTANGLE_WIDENESS
     def progress(self):
