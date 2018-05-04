@@ -96,10 +96,9 @@ class ProgressGUI(object):
             Attributes:
             whoops_button: A button with the text "Whoops!", which calls the function delete_day
                 """
-        self.whoops_button = Tk.Button(
-            self.root, text="Whoops!", command=self.delete_day)
+        self.whoops_button = Tk.Button(self.root, text="Whoops!", command=self.delete_day)
         self.whoops_button.pack(pady=5)
-        if (self.days <= 0):  # Disable Whoops button if days of progress become <= 0
+        if self.days <= 0:  # Disable Whoops button if days of progress become <= 0
             self.whoops_button.config(state="disabled")
         """Display a button with the text "Add Multiple Days" on the canvas.
 
@@ -238,14 +237,12 @@ class MultipleDaysGUI(object):
         """
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
-        self.canvas = Tk.Canvas(
-            self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width=self.CANVAS_WIDTH, height=self.CANVAS_HEIGHT)
         self.canvas.pack()
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
         self.text_entry.focus_force()
-        self.canvas.create_text(self.CANVAS_WIDTH / 2,
-                                20, text="Enter the days you want to progress")
+        self.canvas.create_text(self.CANVAS_WIDTH / 2, 20, text="Enter the days you want to progress")
 
     def submit_button(self):
         """Display the submit button on the canvas.
@@ -256,9 +253,7 @@ class MultipleDaysGUI(object):
         Attributes:
             submit_button: Button with the text "Submit", which calls the function updateDays_and_close
         """
-        self.submit_button = Tk.Button(self.root, text="Submit",
-                                       command=lambda: self.updateDays_and_close(self.days, self.filename,
-                                                                                 self.username))
+        self.submit_button = Tk.Button(self.root, text="Submit", command=lambda: self.updateDays_and_close(self.days, self.filename, self.username))
         self.submit_button.pack()
         self.root.bind('<Return>', lambda: self.updateDays_and_close(self.days, self.filename, self.username))
 
@@ -270,7 +265,7 @@ class MultipleDaysGUI(object):
         update_day_number = int(self.text_entry.get())
         days = days + update_day_number
         self.root.destroy()
-        if (days <= self.goal):
+        if days <= self.goal:
             ProgressGUI(days, filename, username)
             update_days_file(filename, days)
         else:
