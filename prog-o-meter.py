@@ -85,7 +85,7 @@ class ProgressGUI(object):
         Attributes:
             add_day_button: A button with the text "1 more day!", which calls the function add_day
         """
-        self.add_day_button = Tk.Button(self.root, text = "1 more day!", command = elf.add_day)
+        self.add_day_button = Tk.Button(self.root, text = "1 more day!", command = self.add_day)
         self.add_day_button.pack()
         if self.days >= self.GOAL:  # Disable add_day_button if goal have been reached
             self.add_day_button.config(state = "disabled")
@@ -237,7 +237,7 @@ class MultipleDaysGUI(object):
         """
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
-        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = self.CANVAS_WIDTH, height = self.CANVAS_HEIGHT)
         self.canvas.pack()
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
@@ -309,7 +309,7 @@ class StartGUI(object):
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
         VERTICAL_TEXT_POSITION = 20
-        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = self.CANVAS_WIDTH, height = self.CANVAS_HEIGHT)
         self.canvas.pack()
         self.canvas.create_text(self.CANVAS_WIDTH/2, VERTICAL_TEXT_POSITION, text = "Hello, welcome to the prog-o-meter!")
 
@@ -323,8 +323,8 @@ class StartGUI(object):
             BTTN_WIDTH: The width of the radiobuttons is hardcoded to 18 text units.
         """
         BTTN_WIDTH = 18
-        Tk.Radiobutton(self.root, text = "I already have a meter", variable = elf.choice, value = 1, command = elf.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
-        Tk.Radiobutton(self.root, text = "I don't have a meter yet", variable = elf.choice, value = 2, command = elf.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
+        Tk.Radiobutton(self.root, text = "I already have a meter", variable = self.choice, value = 1, command = self.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
+        Tk.Radiobutton(self.root, text = "I don't have a meter yet", variable = self.choice, value = 2, command = self.close_window, indicatoron = 0, width = BTTN_WIDTH).pack(pady = 5)
     def close_window(self):
         """Close the Tkinter window."""
         self.root.destroy()
@@ -376,7 +376,7 @@ class UsernameGUI(object):
         """
         self.CANVAS_WIDTH = 300
         self.CANVAS_HEIGHT = 50
-        self.canvas = Tk.Canvas(self.root, width = elf.CANVAS_WIDTH, height = elf.CANVAS_HEIGHT)
+        self.canvas = Tk.Canvas(self.root, width = self.CANVAS_WIDTH, height = self.CANVAS_HEIGHT)
         self.canvas.pack()
         self.text_entry = Tk.Entry(self.root)
         self.text_entry.pack()
@@ -394,7 +394,7 @@ class UsernameGUI(object):
         Attributes:
             submit_button: Button with the text "Submit", which calls the function save_and_close
         """
-        self.submit_button = Tk.Button(self.root, text = "Submit", command = elf.save_and_close)
+        self.submit_button = Tk.Button(self.root, text = "Submit", command = self.save_and_close)
         self.submit_button.pack()
         self.root.bind('<Return>', self.save_and_close)
     def save_and_close(self, event = None):
