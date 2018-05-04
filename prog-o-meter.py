@@ -22,7 +22,7 @@ except ImportError:
 class ProgressGUI(object):
 
     """Class contains all things related to the window displaying the prog-o-meter, including text, buttons and actions linked to buttons.
-    
+
     Attributes:
         root: a tkinter root.
         filename: the name of the .txt file storing the user's number of days.
@@ -121,9 +121,9 @@ class ProgressGUI(object):
         LEFT_BOUNDARY = 50
         RIGHT_BOUNDARY = 50
         RECTANGLE_HEIGHT = 20
-        RECTANGLE_WIDENESS = (self.CANVAS_WIDTH -(LEFT_BOUNDARY + RIGHT_BOUNDARY)) / self.GOAL
+        RECTANGLE_WIDENESS = (self.CANVAS_WIDTH-(LEFT_BOUNDARY+RIGHT_BOUNDARY))/self.GOAL
         for i in range(self.GOAL):        # Create a rectangle for each day and add it to the rectangle_list
-            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT / 2,LEFT_BOUNDARY + RECTANGLE_WIDENESS,(self.CANVAS_HEIGHT / 2) + RECTANGLE_HEIGHT, fill = "white")
+            rectangle = self.canvas.create_rectangle(LEFT_BOUNDARY, self.CANVAS_HEIGHT/2,LEFT_BOUNDARY+RECTANGLE_WIDENESS,(self.CANVAS_HEIGHT/2)+RECTANGLE_HEIGHT, fill = "white")
             self.rectangle_list.append(rectangle)
             LEFT_BOUNDARY += RECTANGLE_WIDENESS
     def progress(self):
@@ -146,11 +146,11 @@ class ProgressGUI(object):
         """
 
         today = datetime.date.today()
-        completion_date = today + datetime.timedelta(days = days_remaining)
+        completion_date = today + datetime.timedelta(days=days_remaining)
 
         if 4 <= completion_date.day <= 20 or 24 <= completion_date.day <= 30:        # Set the suffix for the day to 'th' if it is between 4 and 20 or between 24 and 30
             suffix = "th"
-        else:      # Otherwise, set the suffix for the day to 'st', 'nd' or 'rd' when the day ends with 1, 2 or 3 respectively.
+        else:       # Otherwise, set the suffix for the day to 'st', 'nd' or 'rd' when the day ends with 1, 2 or 3 respectively.
             suffix = ["st", "nd", "rd"][completion_date.day % 10 - 1]
 
         return datetime.date.strftime(completion_date, "%B %d{0}, %Y".format(suffix))
@@ -164,7 +164,7 @@ class ProgressGUI(object):
         self.days += 1
         self.days_remaining = self.GOAL - self.days
         self.completion_date = self.get_completion_date(self.days_remaining)
-        self.canvas.itemconfig(self.rectangle_list[self.days - 1], fill = "green")
+        self.canvas.itemconfig(self.rectangle_list[self.days-1], fill = "green")
         update_days_file(self.filename, self.days)
         self.canvas.itemconfig(self.countdown_text, text = "".join(("You have ", str(self.days_remaining),  " days left!\n\n", "If you code everyday, you will be done with this project on ", self.completion_date)))
         if self.days >= self.GOAL:  # Disable add_day_button if goal have been reached
