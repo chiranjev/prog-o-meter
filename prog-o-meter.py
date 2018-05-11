@@ -415,7 +415,7 @@ def update_days_file(_filename, _days):
     days_text = open(_filename, "w")
     days_text.write(str(_days))
     days_text.close()
-
+    
 def read_days_file(_filename):
     """Read the file [username].txt, to retrieve the number of days completed, from last use.
     
@@ -427,7 +427,7 @@ def read_days_file(_filename):
     """
     days_text = open(_filename, "r")
     days = days_text.read()
-    days_text.close() 
+    days_text.close()
     return days
 
 def main():
@@ -451,3 +451,4 @@ def main():
     
 if __name__ == '__main__':
     main()
+
