@@ -427,7 +427,7 @@ def read_days_file(_filename):
     """
     days_text = open(_filename, "r")
     days = days_text.read()
-    days_text.close()
+    days_text.close() 
     return days
 
 def main():
