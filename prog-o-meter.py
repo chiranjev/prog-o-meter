@@ -429,7 +429,7 @@ def read_days_file(_filename):
     days = days_text.read()
     days_text.close()
     return days
-    
+
 def main():
     """Mainroutine to run the prog-o-meter program.
     
@@ -451,4 +451,3 @@ def main():
     
 if __name__ == '__main__':
     main()
-    
